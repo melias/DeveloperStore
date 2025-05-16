@@ -9,7 +9,6 @@ public class Product
     public string Category { get; private set; } = null!;
     public string Image { get; private set; } = null!;
 
-    // EF constructor
     private Product() { }
 
     public Product(string name, string description, decimal price, string category, string image)

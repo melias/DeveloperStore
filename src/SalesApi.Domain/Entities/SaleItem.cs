@@ -24,8 +24,8 @@ public class SaleItem
     {
         if (Quantity < 4) return 0;
         if (Quantity > 20) throw new InvalidOperationException("You cannot buy more than 20 pieces of the same item.");
-        if (Quantity >= 10) return UnitPrice * Quantity * 0.20m; // IVA ESPECIAL
-        return UnitPrice * Quantity * 0.10m; // IVA
+        if (Quantity >= 10) return UnitPrice * Quantity * 0.20m;
+        return UnitPrice * Quantity * 0.10m;
     }
 
     private SaleItem() { }
