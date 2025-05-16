@@ -1,5 +1,3 @@
-version: '3.3'
-
 services:
   gateway:
     image: ocelot-gateway
@@ -13,8 +11,6 @@ services:
       - ASPNETCORE_URLS=http://+:7777
     depends_on:
       - sales-api
-    networks:
-      - evaluation-network
 
   sales-api:
     image: sales-api
@@ -28,8 +24,6 @@ services:
       - "8090:8090"
     environment:
       - ConnectionStrings__SalesApiDb=Host=db;Database=SalesApiDb;Username=postgres;Password=admin
-    networks:
-      - evaluation-network
     tty: true
 
   db:
@@ -41,10 +35,3 @@ services:
       POSTGRES_PASSWORD: admin
     ports:
       - "5432:5432"
-    networks:
-      - evaluation-network
-
-networks:
-  evaluation-network:
-    external: true
-  
