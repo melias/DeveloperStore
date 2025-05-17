@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SalesApi.Application;
 using SalesApi.Application.DTOs;
 using SalesApi.Application.Services;
 
@@ -21,20 +22,20 @@ public class SalesController : ControllerBase
         try
         {
             var result = await _service.CreateAsync(dto);
-            return Ok(new
+            return Ok(new SalesResponse
             {
-                data = result,
-                status = "success",
-                message = "Sell success created"
+                Data = [result],
+                Status = "success",
+                Message = "Sell success created"
             });
         }
         catch (InvalidOperationException ex)
         {
-            return BadRequest(new
+            return BadRequest(new SalesResponse
             {
-                type = "BadRequest",
-                error = "Invalid Sell",
-                detail = ex.Message
+                Data = null,
+                Status = "fail",
+                Message = "Error to create a sale"
             });
         }
     }
@@ -43,11 +44,11 @@ public class SalesController : ControllerBase
     public async Task<IActionResult> Get()
     {
         var result = await _service.GetAllAsync();
-        return Ok(new
+        return Ok(new SalesResponse
         {
-            data = result,
-            status = "success",
-            message = "Operation completed successfully"
+            Data = (List<SaleResponseDto>)result,
+            Status = "success",
+            Message = "Operation completed successfully"
         });
     }
 
@@ -55,10 +56,11 @@ public class SalesController : ControllerBase
     public async Task<IActionResult> Delete(Guid id)
     {
         await _service.CancelAsync(id);
-        return Ok(new
+        return Ok(new SalesResponse
         {
-            status = "success",
-            message = "Sell Cancelled"
+            Data = null,
+            Status = "success",
+            Message = "Sell Cancelled"
         });
     }
 }

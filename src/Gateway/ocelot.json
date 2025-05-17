@@ -1,19 +1,43 @@
 {
   "Routes": [
     {
-      "UpstreamHttpMethod": [ "Get" ],
-      "UpstreamPathTemplate": "/ocelot/posts/{id}",
-      "DownstreamPathTemplate": "/todos/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/products",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "jsonplaceholder.typicode.com",
-          "Port": 443
+          "Host": "sales-api",
+          "Port": 7777
         }
-      ]
+      ],
+      "UpstreamPathTemplate": "/products",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/sales",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "sales-api",
+          "Port": 7777
+        }
+      ],
+      "UpstreamPathTemplate": "/sales",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/sales/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "sales-api",
+          "Port": 7777
+        }
+      ],
+      "UpstreamPathTemplate": "/sales/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ]
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://api.mybusiness.com"
+    "BaseUrl": "http://ocelot-gateway:7777"
   }
 }
