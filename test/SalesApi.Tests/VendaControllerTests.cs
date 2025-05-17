@@ -19,8 +19,8 @@ namespace Venda.Tests
 
         public VendaApiIntegrationTests()
         {
-            _client = new HttpClient { BaseAddress = new Uri("http://ocelot-gateway:7777") };
-            //_client = new HttpClient { BaseAddress = new Uri("http://localhost:7777") };
+            //_client = new HttpClient { BaseAddress = new Uri("http://ocelot-gateway:7777") };
+           _client = new HttpClient { BaseAddress = new Uri("http://localhost:7777") };
         }
 
         [Fact]

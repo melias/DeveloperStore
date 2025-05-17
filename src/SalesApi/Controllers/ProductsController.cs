@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SalesApi.Application;
 using SalesApi.Application.DTOs;
 using SalesApi.Application.Services;
 
@@ -19,11 +20,11 @@ public class ProductsController : ControllerBase
     public async Task<IActionResult> Get()
     {
         var result = await _service.GetAllAsync();
-        return Ok(new
+        return Ok(new ProductResponse
         {
-            dados = result,
-            status = "sucesso",
-            mensagem = "Operação concluída com sucesso"
+            Data = result?.ToList(),
+            Status = "sucesso",
+            Message = "Operação concluída com sucesso"
         });
     }
 
@@ -31,11 +32,11 @@ public class ProductsController : ControllerBase
     public async Task<IActionResult> Post([FromBody] ProductRequestDto dto)
     {
         var result = await _service.CreateAsync(dto);
-        return CreatedAtAction(nameof(Get), new { id = result.Id }, new
+        return CreatedAtAction(nameof(Get), new { id = result.Id }, new ProductResponse
         {
-            dados = result,
-            status = "sucesso",
-            mensagem = "Operação concluída com sucesso"
+            Data = [result],
+            Status = "sucesso",
+            Message = "Operação concluída com sucesso"
         });
     }
 }

@@ -46,7 +46,7 @@ public class SalesController : ControllerBase
         var result = await _service.GetAllAsync();
         return Ok(new SalesResponse
         {
-            Data = (List<SaleResponseDto>)result,
+            Data = result?.ToList(),
             Status = "success",
             Message = "Operation completed successfully"
         });
