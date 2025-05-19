@@ -14,12 +14,12 @@ Este projeto é uma API em .NET 8 estruturada em camadas (DDD) com endpoints par
 ## 📦 Estrutura
 
 src/
-├── Api/
-├── SalesApi.Application/
-├── SalesApi.Domain/
-├── SalesApi.Infrastructure/
+ - SalesApi/
+	- SalesApi.Application/
+	- SalesApi.Domain/
+	- SalesApi.Infrastructure/
 test/
-└── SalesApi.Tests/
+ - SalesApi.Tests/
 
 
 ## 🚀 Executando com Docker
@@ -34,8 +34,6 @@ docker-compose up --build
 
 3. Acesse:
 
-Swagger: http://localhost:7777/swagger
-
 API Base URL: http://localhost:7777/
 
 
@@ -47,10 +45,10 @@ dotnet test
 ## 📌 Endpoints
 
 Produtos
-GET /products
-POST /products
+ - GET /products
+ - POST /products
 
 Vendas
-GET /sales
-POST /sales
-DELETE /sales/{id}
+ - GET /sales
+ - POST /sales
+ - DELETE /sales/{id}
