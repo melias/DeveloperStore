@@ -10,21 +10,20 @@ using System.Reflection.Metadata.Ecma335;
 using System.Xml;
 using SalesApi.Application;
 
-namespace Venda.Tests
+namespace SalesApi.Tests
 {
-    [TestCaseOrderer("Venda.Tests.CustomTestOrderer", "Venda.Tests")]
+    [TestCaseOrderer("SalesApi.Tests.CustomTestOrderer", "SalesApi.Tests")]
     public class VendaApiIntegrationTests
     {
         private readonly HttpClient _client;
 
         public VendaApiIntegrationTests()
         {
-            //_client = new HttpClient { BaseAddress = new Uri("http://ocelot-gateway:7777") };
-           _client = new HttpClient { BaseAddress = new Uri("http://localhost:7777") };
+           _client = new HttpClient { BaseAddress = new Uri("http://ocelot-gateway:7777") };
+           //_client = new HttpClient { BaseAddress = new Uri("http://localhost:7777") };
         }
 
-        [Fact]
-        //[Fact, TestPriority(0)]
+        [Fact, TestPriority(0)]
         //[Fact(Skip = "Este teste est� desativado temporariamente.")]
         public async Task Create_Products()
         {
@@ -59,8 +58,7 @@ namespace Venda.Tests
             }
         }
 
-        [Fact]
-        //[Fact, TestPriority(2)]
+        [Fact, TestPriority(2)]
         public async Task Should_Create_Sale_With_NoDiscount()
         {
             {
@@ -115,8 +113,7 @@ namespace Venda.Tests
             }
         }
 
-        [Fact]
-        //[Fact, TestPriority(3)]
+        [Fact, TestPriority(3)]
         public async Task Should_Create_Sale_With_10PercentDiscount()
         {
             {
@@ -179,8 +176,7 @@ namespace Venda.Tests
             }
         }
 
-        [Fact]
-        //[Fact, TestPriority(4)]
+        [Fact, TestPriority(4)]
         public async Task Should_Create_Sale_With_10PercentDiscount_20Prod()
         {
             {
@@ -242,8 +238,7 @@ namespace Venda.Tests
             }
         }
 
-        [Fact]
-        //[Fact, TestPriority(5)]
+        [Fact, TestPriority(5)]
         public async Task Should_Apply_20Percent_Discount_For_10_To_20_Items()
         {
             {
@@ -315,8 +310,7 @@ namespace Venda.Tests
             }
         }
 
-        [Fact]
-        //[Fact, TestPriority(6)]
+        [Fact, TestPriority(6)]
         public async Task Should_Not_Allow_More_Than_20_Items()
         {
             {
@@ -383,8 +377,7 @@ namespace Venda.Tests
             }
         }
 
-        [Fact]
-        //[Fact, TestPriority(10)]
+        [Fact, TestPriority(10)]
         public async Task Should_Cancel_Sale()
         {
             // 1. Buscar produtos do endpoint
