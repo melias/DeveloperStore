@@ -56,7 +56,7 @@ public class SaleService : ISaleService
                 i.ProductId,
                 i.Quantity,
                 i.UnitPrice,
-                i.ValueMonetaryTaxApplied,
+                i.Discount,
                 i.Total,
                 i.SaleId
             )).ToList()

@@ -15,7 +15,7 @@ public record SaleItemResponseDto(
     Guid ProductId,
     int Quantity,
     decimal UnitPrice,
-    decimal ValueMonetaryTaxApplied,
+    decimal Discount,
     decimal Total,
     Guid SaleId
 );

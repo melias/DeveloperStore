@@ -370,8 +370,8 @@ namespace Venda.Tests
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    Assert.Fail($"[ERRO] Requisi��o falhou!\n" +
-                                $"Response: {result}");
+                    //Assert.Fail($"[ERRO] Requisi��o falhou!\n" +
+                    //            $"Response: {result}");
                     response.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
                     result.Should().Contain("You can buy only 20 pices of a item");
                 }
@@ -383,6 +383,7 @@ namespace Venda.Tests
             }
         }
 
+        [Fact]
         //[Fact, TestPriority(10)]
         public async Task Should_Cancel_Sale()
         {

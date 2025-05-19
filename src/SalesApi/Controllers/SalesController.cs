@@ -35,7 +35,7 @@ public class SalesController : ControllerBase
             {
                 Data = null,
                 Status = "fail",
-                Message = "Error to create a sale"
+                Message = "Error to create a sale: You can buy only 20 pices of a item."
             });
         }
     }

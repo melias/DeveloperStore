@@ -12,7 +12,7 @@ public class SaleItemTests
     {
         var item = new SaleItem(Guid.NewGuid(), quantity, unitPrice);
 
-        Assert.Equal(expectedTax, item.ValueMonetaryTaxApplied);
+        Assert.Equal(expectedTax, item.Discount);
         Assert.Equal((quantity * unitPrice) + expectedTax, item.Total);
     }
 
@@ -23,7 +23,7 @@ public class SaleItemTests
     {
         var item = new SaleItem(Guid.NewGuid(), quantity, unitPrice);
 
-        Assert.Equal(expectedTax, item.ValueMonetaryTaxApplied);
+        Assert.Equal(expectedTax, item.Discount);
         Assert.Equal((quantity * unitPrice) + expectedTax, item.Total);
     }
 
@@ -34,7 +34,7 @@ public class SaleItemTests
     {
         var item = new SaleItem(Guid.NewGuid(), quantity, unitPrice);
 
-        Assert.Equal(expectedTax, item.ValueMonetaryTaxApplied);
+        Assert.Equal(expectedTax, item.Discount);
         Assert.Equal((quantity * unitPrice) + expectedTax, item.Total);
     }
 

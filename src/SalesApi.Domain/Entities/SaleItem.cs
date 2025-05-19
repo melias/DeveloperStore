@@ -6,7 +6,7 @@ public class SaleItem
     public Guid ProductId { get; private set; }
     public int Quantity { get; private set; }
     public decimal UnitPrice { get; private set; }
-    public decimal ValueMonetaryTaxApplied { get; private set; }
+    public decimal Discount { get; private set; }
     public decimal Total { get; private set; }
     public Guid SaleId { get; private set; }
 
@@ -16,15 +16,15 @@ public class SaleItem
         ProductId = productId;
         Quantity = quantity;
         UnitPrice = unitPrice;
-        ValueMonetaryTaxApplied = CalculateTax();
-        Total = (UnitPrice * Quantity) + ValueMonetaryTaxApplied;
+        Discount = CalculateTax();
+        Total = (UnitPrice * Quantity) - Discount;
     }
 
     private decimal CalculateTax()
     {
         if (Quantity < 4) return 0;
-        if (Quantity > 20) throw new InvalidOperationException("You cannot buy more than 20 pieces of the same item.");
-        if (Quantity >= 10) return UnitPrice * Quantity * 0.20m;
+        if (Quantity >= 10 && Quantity <= 20) return UnitPrice * Quantity * 0.20m;
+        if (Quantity > 20) throw new InvalidOperationException("You can buy only 20 pices of a item.");
         return UnitPrice * Quantity * 0.10m;
     }
 
