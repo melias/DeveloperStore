@@ -24,7 +24,7 @@ public class SaleItemTests
         var item = new SaleItem(Guid.NewGuid(), quantity, unitPrice);
 
         Assert.Equal(expectedTax, item.Discount);
-        Assert.Equal((quantity * unitPrice) + expectedTax, item.Total);
+        Assert.Equal((quantity * unitPrice) - expectedTax, item.Total);
     }
 
     [Theory]
@@ -35,7 +35,7 @@ public class SaleItemTests
         var item = new SaleItem(Guid.NewGuid(), quantity, unitPrice);
 
         Assert.Equal(expectedTax, item.Discount);
-        Assert.Equal((quantity * unitPrice) + expectedTax, item.Total);
+        Assert.Equal((quantity * unitPrice) - expectedTax, item.Total);
     }
 
     [Fact]
@@ -48,6 +48,6 @@ public class SaleItemTests
         var ex = Assert.Throws<InvalidOperationException>(() =>
             new SaleItem(productId, quantity, unitPrice));
 
-        Assert.Equal("You cannot buy more than 20 pieces of the same item.", ex.Message);
+        Assert.Equal("You can buy only 20 pices of a item.", ex.Message);
     }
 }

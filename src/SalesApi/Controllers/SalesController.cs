@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using SalesApi.Application;
 using SalesApi.Application.DTOs;
-using SalesApi.Application.Services;
+using SalesApi.Application.Sales;
 
 namespace SalesApi.Controllers;
 
@@ -9,11 +10,11 @@ namespace SalesApi.Controllers;
 [Route("sales")]
 public class SalesController : ControllerBase
 {
-    private readonly ISaleService _service;
+    private readonly IMediator _mediator;
 
-    public SalesController(ISaleService service)
+    public SalesController(IMediator mediator)
     {
-        _service = service;
+        _mediator = mediator;
     }
 
     [HttpPost]
@@ -21,12 +22,12 @@ public class SalesController : ControllerBase
     {
         try
         {
-            var result = await _service.CreateAsync(dto);
-            return Ok(new SalesResponse
+            var result = await _mediator.Send(new CreateSaleCommand(dto));
+            return Ok(new
             {
-                Data = [result],
-                Status = "success",
-                Message = "Sell success created"
+                data = result,
+                status = "success",
+                message = "Sell success created"
             });
         }
         catch (InvalidOperationException ex)
@@ -43,7 +44,7 @@ public class SalesController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        var result = await _service.GetAllAsync();
+        var result = await _mediator.Send(new GetSalesQuery());
         return Ok(new SalesResponse
         {
             Data = result?.ToList(),
@@ -55,7 +56,7 @@ public class SalesController : ControllerBase
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id)
     {
-        await _service.CancelAsync(id);
+        await _mediator.Send(new CancelSaleCommand(id));
         return Ok(new SalesResponse
         {
             Data = null,

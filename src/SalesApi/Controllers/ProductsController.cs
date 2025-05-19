@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using SalesApi.Application;
 using SalesApi.Application.DTOs;
-using SalesApi.Application.Services;
+using SalesApi.Application.Products;
 
 namespace SalesApi.Controllers;
 
@@ -9,17 +10,17 @@ namespace SalesApi.Controllers;
 [Route("[controller]")]
 public class ProductsController : ControllerBase
 {
-    private readonly IProductService _service;
+    private readonly IMediator _mediator;
 
-    public ProductsController(IProductService service)
+    public ProductsController(IMediator mediator)
     {
-        _service = service;
+        _mediator = mediator;
     }
 
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        var result = await _service.GetAllAsync();
+        var result = await _mediator.Send(new GetProductsQuery());
         return Ok(new ProductResponse
         {
             Data = result?.ToList(),
@@ -31,7 +32,7 @@ public class ProductsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] ProductRequestDto dto)
     {
-        var result = await _service.CreateAsync(dto);
+        var result = await _mediator.Send(new CreateProductCommand(dto));
         return CreatedAtAction(nameof(Get), new { id = result.Id }, new ProductResponse
         {
             Data = [result],
